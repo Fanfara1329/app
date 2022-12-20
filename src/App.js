@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import { Comments } from "./components/Comments";
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {Reg} from "./registration.js"
 
 import "./App.css";
