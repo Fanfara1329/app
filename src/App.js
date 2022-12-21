@@ -10,7 +10,6 @@ import { Comments } from "./components/Comments";
 import TextField from "@mui/material/TextField";
 import { useForm } from "react-hook-form";
 import { Route, Routes } from 'react-router-dom';
-import {Reg} from "./registration.js"
 
 import "./App.css";
 
@@ -102,13 +101,60 @@ function Posts(props) {
   );
 }
 
-export default App;
+function Reg() {
+  const { register, handleSubmit, formState } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Нет ошибок", data);
+    setUrl(`https://avatars.dicebear.com/api/${data.gender}/${data.key}.svg?background=%230000ff&mood%5B%5D=${data.mood}`);
+  };
+
+  const onHandleSubmit = (e) => {
+    const func = handleSubmit(onSubmit);
+    func(e);
+  };
+
+  const [url, setUrl] = useState(
+    "https://avatars.dicebear.com/api/female/zxc.svg?background=%230000ff&mood%5B%5D=happy"
+  );
+
+ return (
+    <div class="autolayout" className="App">
+       <header style={{ width: "350px", display: "grid", gap: "10px" }}>
+        <form onSubmit={onHandleSubmit}>
+        <input placeholder="Имя" {...register("first_name")} />
+        <input placeholder="Фамилия" {...register("second_name")} />
+          <select name="gender" {...register("gender")}>
+            <option value="male">male</option>
+            <option value="female" selected>female</option>
+          </select>
+          <input
+            placeholder="Номер телефона"
+            {...register("phone_number", {
+              pattern: /^\+79\d{9}$/,
+            })}
+          />
+          <input placeholder="Email адрес" {...register("email")} />
+          <input placeholder="Пароль" {...register("password")} />
+          <button type="submit">Зарегистрироваться</button>
+          <h1 href="/list">Авторизация</h1>
+          {formState.errors.phone_number !== undefined && (
+            <div>Ошибка в номере телефона</div>
+          )}
+        </form>
+      </header>
+    </div>
+  );
+ }
+
+
+export default Reg;
 
 export function AllRoutes(){
   return(
     <Routes>
-      <Route path="/" element={<App/>}/>
-      <Route path="/reg" element={<Reg/>}/>
+      <Route path="/" element={<Reg/>}/>
+      <Route path="/list" element={<App/>}/>
     </Routes>
   )
 }

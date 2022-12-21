@@ -3,3 +3,19 @@
   justify-content: center;
   width: 100vw;
 }
+.autolayout{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 50px;
+
+position: absolute;
+width: 1001px;
+height: 1080px;
+left: 488px;
+top: 0px;
+
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
